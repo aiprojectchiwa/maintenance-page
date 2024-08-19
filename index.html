@@ -7,47 +7,51 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .maintenance-background {
-            background: linear-gradient(to right, #fbc2eb, #a6c0fe);
+            background: linear-gradient(to right, #e2a9b7, #c3cfe2);
         }
         .countdown {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #f56565;
         }
         .countdown-label {
             color: #4a5568;
         }
+        .container {
+            max-width: 500px;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center h-screen maintenance-background">
-    <div class="text-center bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto">
-        <h1 class="text-4xl font-bold text-purple-700 mb-6">Panel Sedang Maintenance</h1>
-        <p class="text-lg text-gray-800 mb-4">Kami sedang melakukan migrasi ke VPS baru.</p>
+    <div class="container text-center bg-white p-10 rounded-lg shadow-lg">
+        <h1 class="text-4xl font-bold text-purple-800 mb-6">Panel Sedang Maintenance</h1>
+        <p class="text-lg text-gray-800 mb-6">Kami sedang melakukan migrasi ke VPS baru.</p>
         <p class="text-lg text-gray-800 mb-6">Mohon maaf atas ketidaknyamanannya.</p>
-        <p class="text-sm countdown-label">Waktu Estimasi:</p>
+        <p class="text-sm countdown-label mb-2">Waktu Estimasi:</p>
         <p id="countdown" class="countdown">Loading...</p>
-        <script>
-            function updateCountdown() {
-                const endTime = new Date('2024-08-20T00:00:00Z').getTime(); // Set waktu estimasi di sini
-                const now = new Date().getTime();
-                const distance = endTime - now;
+    </div>
 
-                if (distance < 0) {
-                    document.getElementById('countdown').innerHTML = 'Pekerjaan selesai, terima kasih atas kesabarannya!';
-                    return;
-                }
+    <script>
+        function updateCountdown() {
+            const endTime = new Date().getTime() + 27 * 60 * 60 * 1000; // Set waktu estimasi 27 jam dari sekarang
+            const now = new Date().getTime();
+            const distance = endTime - now;
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById('countdown').innerHTML =
-                    days + ' hari ' + hours + ' jam ' + minutes + ' menit ' + seconds + ' detik ';
+            if (distance < 0) {
+                document.querySelector('.container').style.display = 'none'; // Sembunyikan elemen jika waktu selesai
+                return;
             }
 
-            setInterval(updateCountdown, 1000);
-        </script>
-    </div>
+            const hours = Math.floor(distance / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML =
+                hours + ' jam ' + minutes + ' menit ' + seconds + ' detik ';
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Panggil fungsi sekali agar countdown tampil langsung
+    </script>
 </body>
 </html>
