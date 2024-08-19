@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perbaikan Panel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Maintenance</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+    <div class="text-center bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto">
+        <h1 class="text-3xl font-bold text-red-600 mb-4">🚧 Panel Sedang Maintenance 🚧</h1>
+        <p class="text-lg text-gray-700 mb-4">Pemilik sedang melakukan migrasi ke VPS baru. Kami mohon maaf atas ketidaknyamanannya.</p>
+        <p class="text-sm text-gray-500">Waktu Estimasi: <span id="countdown"></span></p>
+        <script>
+            function updateCountdown() {
+                const endTime = new Date('2024-08-20T00:00:00Z').getTime(); // Set waktu estimasi di sini
+                const now = new Date().getTime();
+                const distance = endTime - now;
 
-<body class="flex items-center justify-center h-screen bg-pink-100">
-    <div class="text-center">
-        <img src="https://i.pinimg.com/originals/8e/c4/d3/8ec4d32d82aeb5018e53921eb8a29bb3.gif" alt="Chibi Girl" class="w-32 mx-auto mb-4">
-        <h1 class="text-lg text-pink-800 font-semibold mb-2">Maaf</h1>
-        <p class="text-pink-700 text-sm">Panel ini sedang dalam proses perbaikan,</p>
-        <p class="text-pink-700 text-sm mb-4">silahkan tunggu ya~</p>
-        <button class="px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 focus:outline-none focus:ring focus:ring-pink-300 transition duration-300 ease-in-out">
-            <span class="animate-pulse">Loading...</span>
-        </button>
+                if (distance < 0) {
+                    document.getElementById('countdown').innerHTML = 'Pekerjaan selesai, terima kasih atas kesabarannya!';
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('countdown').innerHTML =
+                    days + ' hari ' + hours + ' jam ' + minutes + ' menit ' + seconds + ' detik ';
+            }
+
+            setInterval(updateCountdown, 1000);
+        </script>
     </div>
 </body>
-
 </html>
