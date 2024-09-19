@@ -39,28 +39,12 @@
       background-color: #45a049;
     }
   </style>
-  <script>
-    function redirectToNewDomain() {
-      var currentUrl = window.location.hostname;
-      var subdomain = currentUrl.split('.')[0];
-      var path = window.location.pathname;
-      var newUrl = 'https://chiwa.id';
-
-      if (subdomain !== 'www' && subdomain !== 'chiwa') {
-        newUrl = 'https://' + subdomain + '.chiwa.id';
-      }
-
-      newUrl += path;
-      window.location.href = newUrl;
-    }
-  </script>
 </head>
 <body>
   <div class="container">
     <h1>Situs Sedang Dalam Perbaikan</h1>
     <p>Kami sedang melakukan maintenance dan sedang dilakukan pengalihan domain. Mohon maaf atas ketidaknyamanannya.</p>
     <p>Domain lama <strong>chiwa.my.id</strong> akan dialihkan ke <strong>chiwa.id</strong>.</p>
-    <a href="javascript:void(0)" class="btn" onclick="redirectToNewDomain()">Klik di sini untuk melanjutkan</a>
   </div>
 </body>
 </html>
