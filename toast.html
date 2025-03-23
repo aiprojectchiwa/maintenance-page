@@ -15,11 +15,11 @@
         
         document.addEventListener("DOMContentLoaded", function () {
             const message = getQueryParam("message");
-            const type = getQueryParam("type") || "info";
+            const type = getQueryParam("type") || "info" || "error";
             
             if (message) {
                 Swal.fire({
-                    title: "Pesan",
+                    title: "Info",
                     text: message,
                     icon: type,
                 });
