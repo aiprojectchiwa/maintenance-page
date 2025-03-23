@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SweetAlert dari Query</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            const message = getQueryParam("message");
+            const type = getQueryParam("type") || "info";
+            
+            if (message) {
+                Swal.fire({
+                    title: "Pesan",
+                    text: message,
+                    icon: type,
+                });
+            }
+        });
+    </script>
+</body>
+</html>
